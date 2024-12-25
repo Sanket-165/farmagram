@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmaGram - User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f7f7f7;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100%;
+            min-height: 100vh;
+            padding: 2rem;
+            overflow-y: auto;
+            background-color: #f1f1f1;
+        }
+
+        .profile-container {
+            background: #fff;
+            width: 900px;
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            transform: scale(0.95);
+            animation: fadeIn 0.6s ease-out forwards;
+            overflow-y: auto;
+            height: auto;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .home-link-container {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .home-link {
+            font-size: 18px;
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.8rem 1.5rem;
+            display: block; /* Makes the entire area clickable */
+            background: #fff;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .home-link:hover {
+            background: #4CAF50;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .profile-header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #4CAF50;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profile-header img:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-header img:active {
+            transform: scale(1.1);
+        }
+
+        .enlarged-image-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+        }
+
+        .enlarged-image-overlay img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 4px solid #4CAF50;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .enlarged-image-overlay .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .profile-header h1 {
+            font-size: 28px;
+            color: #4CAF50;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-header p {
+            font-size: 18px;
+            color: #777;
+        }
+
+        .profile-info, .recent-activities {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .profile-info p, .recent-activities p {
+            font-size: 18px;
+            color: #555;
+            margin: 0.5rem 0;
+        }
+
+        .recent-activities ul {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+
+        .recent-activities li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: #f9f9f9;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .recent-activities li:hover {
+            background: #f1f1f1;
+        }
+
+        .recent-activities li .activity-type {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .recent-activities li .activity-details {
+            color: #777;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .action-buttons a, .action-buttons button {
+            padding: 1rem 2rem;
+            font-size: 16px;
+            font-weight: 600;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .action-buttons a:hover, .action-buttons button:hover {
+            background: #45A049;
+            transform: translateY(-5px);
+        }
+
+        .action-buttons .logout {
+            background: #e74c3c; /* Red background */
+            color: white;
+        }
+
+        .action-buttons .logout:hover {
+            background: #c0392b; /* Darker red on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-container {
+                padding: 1.5rem;
+            }
+
+            .profile-header img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-header h1 {
+                font-size: 24px;
+            }
+
+            .action-buttons a, .action-buttons button {
+                width: 48%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <!-- Home Link -->
+        <div class="home-link-container">
+            <a href="index.html" class="home-link">Home</a>
+        </div>
+
+        <div class="profile-header">
+            <img src="profile.jpg" alt="User Profile Picture" onclick="enlargeImage()">
+            <h1>Farmer Name</h1>
+            <p>@username</p>
+        </div>
+
+        <div class="profile-info">
+            <h2 class="section-title">Personal Information</h2>
+            <p><strong>Email:</strong> xyz@.com</p>
+            <p><strong>Phone:</strong> +91 123 456 7890</p>
+            <p><strong>Farm Address:</strong> abc street,pqr village Pin-411043</p>
+        </div>
+
+        <div class="recent-activities">
+            <h2 class="section-title">Recent Activities</h2>
+            <ul>
+                <li>
+                    <span class="activity-type">Sold Products</span>
+                    <span class="activity-details">25 items sold in the last month</span>
+                </li>
+                <li>
+                    <span class="activity-type">Purchased Products</span>
+                    <span class="activity-details">10 items purchased in the last month</span>
+                </li>
+                <li>
+                    <span class="activity-type">Ratings</span>
+                    <span class="activity-details">4.8/5 based on 50 reviews</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="action-buttons">
+            <a href="setting.html">Edit Profile</a>
+            <button class="logout" onclick="window.location.href='login.html'">Logout</button>
+        </div>
+    </div>
+
+    <!-- Enlarged Image Modal -->
+    <div class="enlarged-image-overlay" id="imageOverlay">
+        <img src="profile.jpg" alt="Enlarged Profile Picture">
+        <button class="close-btn" onclick="closeImage()">✖</button>
+    </div>
+
+    <script>
+        function enlargeImage() {
+            document.getElementById("imageOverlay").style.display = "flex";
+        }
+
+        function closeImage() {
+            document.getElementById("imageOverlay").style.display = "none";
+        }
+    </script>
+</body>
+</html>

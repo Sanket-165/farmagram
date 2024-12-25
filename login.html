@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmaGram - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .circle.small {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 20%;
+        }
+
+        .circle.medium {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            right: 30%;
+        }
+
+        .circle.large {
+            width: 250px;
+            height: 250px;
+            bottom: 10%;
+            left: 10%;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .login-container {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-container h1 {
+            font-size: 24px;
+            margin-bottom: 1rem;
+            color: #4CAF50;
+        }
+
+        .role-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-buttons button {
+            width: 48%;
+            padding: 0.75rem;
+            font-size: 16px;
+            border: none;
+            background: #4CAF50;
+            color: #ffffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .role-buttons button:hover {
+            background: #45A049;
+        }
+
+        .login-form {
+            display: none;
+        }
+
+        .login-form.active {
+            display: block;
+        }
+
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            padding: 0.75rem;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .login-form button {
+            padding: 0.75rem;
+            font-size: 16px;
+            border: none;
+            background: #4CAF50;
+            color: #ffffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .login-form button:hover {
+            background: #45A049;
+        }
+
+        .login-container p {
+            margin-top: 1rem;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .login-container a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="circle small"></div>
+    <div class="circle medium"></div>
+    <div class="circle large"></div>
+
+    <div class="login-container">
+        <h1>Welcome to FarmaGram</h1>
+        <div class="role-buttons">
+            <button id="sellerButton">Login as Seller</button>
+            <button id="consumerButton">Login as Consumer</button>
+        </div>
+
+        <form id="sellerForm" class="login-form">
+            <input type="text" name="username" placeholder="Seller Username" required>
+            <input type="password" name="password" placeholder="Seller Password" required>
+            <button type="button" onclick="validateLogin('seller')">Login</button>
+        </form>
+
+        <form id="consumerForm" class="login-form">
+            <input type="text" name="username" placeholder="Consumer Username" required>
+            <input type="password" name="password" placeholder="Consumer Password" required>
+            <button type="button" onclick="validateLogin('consumer')">Login</button>
+        </form>
+
+        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+    </div>
+
+    <script>
+        const sellerButton = document.getElementById('sellerButton');
+        const consumerButton = document.getElementById('consumerButton');
+        const sellerForm = document.getElementById('sellerForm');
+        const consumerForm = document.getElementById('consumerForm');
+
+        sellerButton.addEventListener('click', () => {
+            sellerForm.classList.add('active');
+            consumerForm.classList.remove('active');
+        });
+
+        consumerButton.addEventListener('click', () => {
+            consumerForm.classList.add('active');
+            sellerForm.classList.remove('active');
+        });
+
+        function validateLogin(role) {
+            const username = role === 'seller' 
+                ? sellerForm.querySelector('input[name="username"]').value
+                : consumerForm.querySelector('input[name="username"]').value;
+
+            const password = role === 'seller' 
+                ? sellerForm.querySelector('input[name="password"]').value
+                : consumerForm.querySelector('input[name="password"]').value;
+
+            if (username === 'farmer' && password === '1234') {
+                alert('Login successful!');
+                window.location.href = role === 'seller' ? 'index.html' : 'index.html';
+            } else {
+                alert('Invalid username or password.');
+            }
+        }
+    </script>
+</body>
+</html>

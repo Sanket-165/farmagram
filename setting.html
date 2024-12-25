@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmaGram - Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+       body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: url('butterfly.jpg') no-repeat center center fixed; /* Add your image URL here */
+    background-size: cover; /* Ensures the image covers the entire page */
+    color: #333;
+}
+
+
+        .container {
+            max-width: 800px;
+            margin: 3rem auto;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: #fff;
+            background: #4CAF50;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .header a:hover {
+            background: #388E3C;
+        }
+
+        .header .settings-icon {
+            font-size: 24px;
+            color: #4CAF50;
+            margin-right: 1rem;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .input-container {
+            flex-grow: 1;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], select {
+            width: 70%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .enter-button {
+            margin-left: auto;
+            width: 50%;
+            height: 2.6rem;
+            font-size: 14px;
+            color: #fff;
+            background: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .enter-button:hover {
+            background: #388E3C;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            font-size: 16px;
+            color: #fff;
+            background: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #388E3C;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .password-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html">Home</a>
+            <span class="settings-icon">⚙</span>
+        </div>
+
+        <h1>Settings</h1>
+
+        <div class="section">
+            <h2>Profile Settings</h2>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" value="current_user" placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" value="user@example.com" placeholder="Enter your email">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Change Password</h2>
+            <button id="change-password-button">Change Password</button>
+            <div class="password-section" id="password-section">
+                <div class="form-group">
+                    <div class="input-container">
+                        <label for="current-password">Current Password</label>
+                        <input type="password" id="current-password" placeholder="Enter current password">
+                    </div>
+                    <button class="enter-button" id="validate-password-button">Enter</button>
+                </div>
+                <div id="new-password-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="new-password">New Password</label>
+                        <input type="password" id="new-password" placeholder="Enter new password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm New Password</label>
+                        <input type="password" id="confirm-password" placeholder="Confirm new password">
+                    </div>
+                    <button id="save-password-button">Save Password</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Notification Settings</h2>
+            <div class="form-group">
+                <label for="notifications">Email Notifications</label>
+                <select id="notifications">
+                    <option value="enabled">Enabled</option>
+                    <option value="disabled">Disabled</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Privacy Settings</h2>
+            <div class="form-group">
+                <label for="visibility">Profile Visibility</label>
+                <select id="visibility">
+                    <option value="public">Public</option>
+                    <option value="private">Private</option>
+                </select>
+            </div>
+        </div>
+
+        <button>Save Changes</button>
+
+        <div class="footer">
+            <p>&copy; 2024 FarmaGram. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        const changePasswordButton = document.getElementById('change-password-button');
+        const passwordSection = document.getElementById('password-section');
+        const validatePasswordButton = document.getElementById('validate-password-button');
+        const savePasswordButton = document.getElementById('save-password-button');
+        const newPasswordFields = document.getElementById('new-password-fields');
+
+        const currentStoredPassword = "1234"; // Simulated current password
+
+        changePasswordButton.addEventListener('click', () => {
+            passwordSection.style.display = passwordSection.style.display === 'block' ? 'none' : 'block';
+        });
+
+        validatePasswordButton.addEventListener('click', () => {
+            const currentPassword = document.getElementById('current-password').value;
+
+            if (!currentPassword) {
+                alert('Please enter your current password.');
+                return;
+            }
+
+            if (currentPassword !== currentStoredPassword) {
+                alert('Current password does not match.');
+                return;
+            }
+
+            newPasswordFields.style.display = 'block';
+        });
+
+        savePasswordButton.addEventListener('click', () => {
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (!newPassword || !confirmPassword) {
+                alert('Please fill in all password fields.');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                alert('New password and confirmation do not match.');
+                return;
+            }
+
+            alert('Password successfully changed!');
+            passwordSection.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

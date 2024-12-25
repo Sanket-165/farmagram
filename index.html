@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmaGram - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #4CAF50, #8BC34A);
+            color: #333;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+.sidebar {
+    width: 250px;
+    height: calc(100vh - 60px); /* Keep the height adjustment */
+    background: #ffffff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    position: fixed;
+    top: 90px; /* Increase this value to shift the sidebar further down */
+    left: -250px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            color: #4CAF50;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            font-weight: 500;
+            display: block;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background: #4CAF50;
+            color: #ffffff;
+        }
+
+        .menu-toggle {
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            outline: none;
+            color: #333;
+            margin-right: 1rem;
+            z-index: 1001; /* Make sure the hamburger icon stays on top */
+            position: relative;
+        }
+
+        .content {
+            margin-left: 0;
+            width: 100%;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        header .logo h1 {
+            font-size: 24px;
+            color: #4CAF50;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        /* Updated .hero section with background image */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: url('farm.jpg') no-repeat center center/cover;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            opacity: 0;
+            transform: translateX(-100%);
+            animation: slideIn 1.5s forwards 1s;
+        }
+
+        .hero p {
+            font-size: 22px;
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.5);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+            padding: 10px;
+            border-radius: 15px;
+            opacity: 0;
+            animation: fadeInText 2s forwards 2s;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInText {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            padding: 2rem;
+        }
+
+        .feature {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature h3 {
+            font-size: 20px;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .feature p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #333;
+            color: #fff;
+            margin-top: 2rem;
+        }
+
+        .profile-container img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <h2>Options</h2>
+        <ul>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="setting.html">Settings</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <header>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <div class="logo">
+                <img src="logo.png" alt="FarmaGram Logo">
+                <h1>FarmaGram</h1>
+            </div>
+            <nav>
+                <a href="about.html">About</a>
+                <a href="features.html">Features</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="profile-container">
+                <a href="profile.html">
+                    <img src="profile.jpg" alt="Profile">
+                </a>
+            </div>
+        </header>
+
+        <section class="hero">
+            <h2>Welcome to FarmaGram</h2>
+            <p>Connecting farmers directly with consumers for a fair and sustainable future.</p>
+        </section>
+
+        <section id="features" class="features">
+            <div class="feature">
+                <h3>Direct Marketplace</h3>
+                <p>Sell your produce directly to buyers without middlemen.</p>
+            </div>
+            <div class="feature">
+                <h3>Secure Transactions</h3>
+                <p>Manage payments easily and securely within the platform.</p>
+            </div>
+            <div class="feature">
+                <h3>Real-Time Updates</h3>
+                <p>Stay updated with real-time inventory and market trends.</p>
+            </div>
+            <div class="feature">
+                <h3>Easy Navigation</h3>
+                <p>User-friendly interface designed for farmers and consumers alike.</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 FarmaGram. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
